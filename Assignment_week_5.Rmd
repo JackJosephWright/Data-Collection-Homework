@@ -1,0 +1,99 @@
+---
+title: "Homework 5"
+author: "Jack Wright"
+date: "9/24/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Load Packages
+```{r message=FALSE}
+library(tidyverse)
+library(RCurl)
+
+```
+
+##Get data from github using RCurl package
+
+```{r}
+url<-"https://raw.githubusercontent.com/JackJosephWright/data/master/hw5.csv?token=AQZFVAMURDMZ6UXUQUADSEK7NVAUI"
+
+
+
+dat<-read.csv(url)
+
+
+```
+
+
+#Tidying data
+ lets take a look
+ 
+ First, I want to remove the divider row from the table and fill out the carrier column
+ 
+```{r}
+#rename a couple columns for ease of use
+names(dat)[1]<-"carrier"
+names(dat)[2]<-"status"
+
+
+
+
+#remove blank row
+dat1<-dat%>%
+  rowwise()%>%
+  filter(!is.na(Los.Angeles))
+
+#fill carrier column, fill() is not working I will dig deeper if i have time
+
+dat1$carrier[2]<-"ALASKA"
+dat1$carrier[4]<-"AM WEST"
+
+
+
+```
+ 
+ 
+ In order for data to be tidy, every column must be a variable and every row must be an observation. On first glance, the destinations look like values of a "destination" column and their values look like "count".
+
+the "X column looks like values of a "carrier" variable
+```{r}
+#converting "destinations"  to destination column and their values to "count"
+carrier_status<-dat1%>%
+  pivot_longer(c("Los.Angeles":"Seattle"),names_to="destination",values_to="count")%>%
+  arrange(destination)
+  
+```
+
+
+## Data Analysis
+
+I want to see which carrier supplied more on time flights. 
+
+I will turn the counts into percentages, only display the on time results, because the delayed is redundant, and drop the "status and "count" columns
+
+```{r}
+carrier_stats<-carrier_status%>%
+  group_by(carrier,destination)%>%
+  mutate(on_time_rate=count/sum(count))%>%
+  filter(status=="on time")%>%
+  select(-status, -count)
+head(carrier_stats)
+```
+
+
+I want to make a histogram
+
+comparing each carrier at each city in a histogram
+
+```{r}
+carrier_stats%>%
+  ggplot(aes(fill=carrier,y=on_time_rate,x=destination))+
+  geom_bar(position="dodge",stat="identity")+coord_flip()
+
+```
+
+
