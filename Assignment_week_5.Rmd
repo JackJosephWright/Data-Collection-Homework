@@ -2,24 +2,27 @@
 title: "Homework 5"
 author: "Jack Wright"
 date: "9/24/2020"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##Load Packages
+## Load Packages
 ```{r message=FALSE}
 library(tidyverse)
 library(RCurl)
 
 ```
 
-##Get data from github using RCurl package
+## Get data from github using RCurl package
 
 ```{r}
-url<-"https://raw.githubusercontent.com/JackJosephWright/data/master/hw5.csv?token=AQZFVAMURDMZ6UXUQUADSEK7NVAUI"
+url<-"https://raw.githubusercontent.com/JackJosephWright/data/master/hw5.csv"
 
 
 
@@ -29,10 +32,8 @@ dat<-read.csv(url)
 ```
 
 
-#Tidying data
- lets take a look
- 
- First, I want to remove the divider row from the table and fill out the carrier column
+## Tidying data
+ lets take a look, I will note in the comments what actions I will take to tidy the data. 
  
 ```{r}
 #rename a couple columns for ease of use
@@ -65,6 +66,7 @@ the "X column looks like values of a "carrier" variable
 carrier_status<-dat1%>%
   pivot_longer(c("Los.Angeles":"Seattle"),names_to="destination",values_to="count")%>%
   arrange(destination)
+head(carrier_status)
   
 ```
 
@@ -73,7 +75,7 @@ carrier_status<-dat1%>%
 
 I want to see which carrier supplied more on time flights. 
 
-I will turn the counts into percentages, only display the on time results, because the delayed is redundant, and drop the "status and "count" columns
+I will turn the counts into percentages, only display the on time results, because the delayed is redundant, and drop the "status and "count" columns.
 
 ```{r}
 carrier_stats<-carrier_status%>%
@@ -85,9 +87,7 @@ head(carrier_stats)
 ```
 
 
-I want to make a histogram
-
-comparing each carrier at each city in a histogram
+I want to see how each carrier did flying to each city. I will make a "dodge" bar plot allowing easy comparison.
 
 ```{r}
 carrier_stats%>%
@@ -97,3 +97,4 @@ carrier_stats%>%
 ```
 
 
+From this plot, it is easy to see Alaska Airlines is better across the board. You can also see that Phoenix has the most on time flights. Further analysis could be done on other datasets to see why Phoenix is so effective.
