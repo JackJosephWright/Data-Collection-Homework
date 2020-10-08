@@ -1,57 +1,28 @@
 <?xml version="1.0" >
-<horror>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<book>
-    <title>In the Mountains of Madness</title>
-    <authors>
-            H. P. Lovecraft   
-    </authors>
-    
-        <subgenre>
-            hard science
-        </subgenre>
-        <theme>
-            forbidden knowledge
-        </theme>
-        <trait>
-            anti-realist
-        </trait>
-</book>
-
-<book>
-    <title> Silence of the Lambs</title>
-    <authors>
-        
-            Thomas Harris
-        
-    </authors>
-    
-        <subgenre>
-             crime procedural
-        </subgenre>
-        <theme>
-            psychopathy
-        </theme>
-        <trait>
-            baroque
-        </trait>
-</book>
-
-<book>
-    <title> Rosemarys  Baby</title>
-    <authors>   
-            Ira Levin 
-    </authors> 
-        <subgenre>
-             mystery
-        </subgenre>
-        <theme>
-            cult
-        </theme>
-        <trait>
-            devil worship
-        </trait>
-</book>
+<root>
+    <book>
+        <title>In the Mountains of Madness</title>
+        <authors> H.P. Lovecraft</authors>
+        <subgenre>hard science</subgenre>
+        <theme>forbidden knowledge</theme>
+        <trait>anti-realist</trait>
+    </book>
+    <book>
+        <title>Silence of the Lambs</title>
+        <authors> Thomas Harris</authors>
+        <subgenre>crime procedural</subgenre>
+        <theme>psychopathy</theme>
+        <trait>baroque</trait>
+    </book>
+    <book>
+        <title>Rosemary's Baby</title>
+        <authors>Ira Levin, Jack Wright</authors>
+        <subgenre>mystery</subgenre>
+        <theme>cult</theme>
+        <trait>devil worship</trait>
+    </book>
 
 
-</horror>
+</root>
