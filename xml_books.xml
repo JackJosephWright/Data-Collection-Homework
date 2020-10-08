@@ -4,11 +4,9 @@
 <book>
     <title>In the Mountains of Madness</title>
     <authors>
-        
-            H. P. Lovecraft
-        
+            H. P. Lovecraft   
     </authors>
-    <themes>
+    
         <subgenre>
             hard science
         </subgenre>
@@ -18,8 +16,6 @@
         <trait>
             anti-realist
         </trait>
-    </themes>
-
 </book>
 
 <book>
@@ -29,7 +25,7 @@
             Thomas Harris
         
     </authors>
-    <themes>
+    
         <subgenre>
              crime procedural
         </subgenre>
@@ -39,32 +35,22 @@
         <trait>
             baroque
         </trait>
-    </themes>
-
 </book>
 
 <book>
     <title> Rosemarys  Baby</title>
-    <authors>
-        
+    <authors>   
             Ira Levin 
-        
-        
-            
-        
-    </authors>
-    <themes>
-        <theme>
+    </authors> 
+        <subgenre>
              mystery
-        </theme>
+        </subgenre>
         <theme>
             cult
         </theme>
-        <theme>
+        <trait>
             devil worship
-        </theme>
-    </themes>
-
+        </trait>
 </book>
 
 
