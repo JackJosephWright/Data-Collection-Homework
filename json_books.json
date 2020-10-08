@@ -1,0 +1,23 @@
+[
+    {
+        "title": "In the Mountains of Madness",
+        "authors": "H.P. Lovecraft",
+        "subgenre": "hard science",
+        "theme": "forbidden knowlege",
+        "trait": "anti-realist"
+    }
+    {
+        "title": "Silence of the Lambs",
+        "authors": "Thomas Harris",
+        "subgenre": "crime procedural",
+        "theme": "psychopathy",
+        "trait": "baroque"
+    }
+    {
+        "title": "Rosemary's Baby",
+        "authors": "Ira Levin, Jack Wright",
+        "subgenre": "mystery",
+        "theme": "cult",
+        "trait": "devil worship"
+    }
+]
