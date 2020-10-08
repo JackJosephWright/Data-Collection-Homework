@@ -4,9 +4,9 @@
 <book>
     <title>In the Mountains of Madness</title>
     <authors>
-        <author>
+        
             H. P. Lovecraft
-        </author>
+        
     </authors>
     <themes>
         <subgenre>
@@ -25,9 +25,9 @@
 <book>
     <title> Silence of the Lambs</title>
     <authors>
-        <author>
+        
             Thomas Harris
-        </author>
+        
     </authors>
     <themes>
         <subgenre>
@@ -46,12 +46,12 @@
 <book>
     <title> Rosemarys  Baby</title>
     <authors>
-        <author>
+        
             Ira Levin 
-        </author>
-        <author>
-            Jack Wright
-        </author>
+        
+        
+            
+        
     </authors>
     <themes>
         <theme>
