@@ -15,7 +15,7 @@
     },
     {
         "title": "Rosemary's Baby",
-        "authors": "Ira Levin, Jack Wright",
+        "authors": ["Ira Levin", "Jack Wright"],
         "subgenre": "mystery",
         "theme": "cult",
         "trait": "devil worship"
