@@ -1,0 +1,57 @@
+---
+title: "Homework 7"
+author: "Jack Wright"
+date: "10/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Libraries
+
+```{r}
+library(tidyverse)
+library(RCurl)
+library(XML)
+library(xml2)
+
+```
+
+
+## Loading an HTML file
+```{r}
+library(rvest)
+df<-read_html('https://raw.githubusercontent.com/JackJosephWright/Data-Collection-Homework/master/html%20books.html')
+df<-html_table(df)
+df
+```
+
+
+## Loading JSON file
+```{r}
+library(jsonlite)
+df <- read_json("https://raw.githubusercontent.com/JackJosephWright/Data-Collection-Homework/master/json_books.json", simplifyVector = TRUE)
+df$authors[3]<-print(df$authors[3])
+df
+
+```
+
+```{r}
+df <- fromJSON("https://raw.githubusercontent.com/JackJosephWright/Data-Collection-Homework/master/json_books.json", simplifyVector = TRUE)
+
+df
+
+```
+
+## Loading XML file
+
+```{r}
+pg_xml<-getURL("https://raw.githubusercontent.com/JackJosephWright/Data-Collection-Homework/master/xml_books.xml")
+df<-xmlToDataFrame(pg_xml)
+df
+
+
+```
+
