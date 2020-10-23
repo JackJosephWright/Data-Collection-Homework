@@ -1,0 +1,106 @@
+---
+title: "Web APIS- New York Times"
+author: "Jack Wright"
+date: "10/23/2020"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE}
+library(tidyverse)
+library(jsonlite)
+library(httr)
+```
+
+## Process
+
+I am using the NY Times API for article searches. I want to search for articles about the New York Jets from the sports desk over the last year. I will be generating the API request programattically. 
+
+## Creating the request for the GET() function in HTTR:
+
+### Load api key
+
+```{r}
+location<-"c:\\password-files-for-r\\nytimes_keys.csv"
+nytimes_keys<-read.csv(location)
+
+base_url<-"https://api.nytimes.com/svc/search/v2/articlesearch.json?"
+#main query
+q<-"q=New+York+Jets"
+#&news_desk=sports&begin_date=20200101&end_date=20201023
+#elements of fq
+key<-paste0("api-key=",nytimes_keys$api_key)
+tag<-paste(q,key,sep="&")
+
+url<-paste0(base_url,tag)
+
+```
+
+
+## Requesting the Data
+
+I will use the GET() function from the httr package and check the status to see if it was successful
+
+```{r}
+jets_pull<-GET(url)
+
+http_status(jets_pull)
+```
+
+
+### Inspecting the data
+
+The request to the api is structured as a nested named list. I need to find out where the content I am interested in is located.
+
+```{r}
+#look at the names
+names(jets_pull)
+
+#i want the content, but its contents is just raw bytes
+glimpse(jets_pull$content)
+#data is in bytes, so convert to text
+jets_content<-fromJSON(rawToChar(jets_pull$content))
+
+#after some checks I found where the data I am interested is located
+names(jets_content$response$docs)
+
+```
+
+
+
+## Convert to Data frame
+
+Since the data is structured as a list, I will convert it to a data frame.
+
+```{r}
+df_jets<-data.frame(jets_content$response$docs)
+
+```
+
+
+#Tidy the Data
+
+The headline column for this data frame is a nested data frame. I will need to unnest it in order to select the main headline.
+
+Then I will create a new dataframe suitable of looking at what my API request returned
+```{r}
+#unnest headline and put it in its own data frame
+df_headline<-unnest(df_jets$headline)
+
+output<-data.frame("main_headline"=df_headline$main,"abstract"=df_jets$abstract,"date"=df_jets$pub_date)
+
+output%>%
+  mutate(ymd=as.Date(date))%>%
+  select(-date)
+```
+
+
+## Conclusions
+
+My pull was only for the first page of results of jets articles (the most recent). I could create a function that allows me to add a pagination facet, allowing me to cycle through the results pages and pull more data. I could have also added more facets to my data frame, like only pulling from the sports desk.
