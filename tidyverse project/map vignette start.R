@@ -22,6 +22,6 @@ factor_names<-as.list(levels(dat$Patron.Type.Definition))
 
 #use map to name the data frames in list
 
-test<-map()
+test<-map2(df_list,factor_names,~modify_if(.,is.data.frame(),setNames(.x,.y)))
 
   
